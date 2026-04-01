@@ -55,14 +55,32 @@ def funcao_afim(a, b, x=None):
     raiz = b / a
     return x, raiz
 
+def funcao_quadratica(a, b, c, x=None):
+    delta = (b * b) - 4 * a * c
+    if pergunta_funcao_quadratica == 'V':
+        valor = a * (x * x) + b * x + c
+        return valor
+    else:
+        if delta < 0:
+            return f'A Função não possui raízes reais exatas, em razão de Delta = {delta}'
+        elif delta == 0:
+            x1 = (-b + math.sqrt(delta)) / 2 * a
+            return f'A Função possui duas raízes reais exatas iguais, em razão de Delta = {delta}, temos X = {x1}'
+        else:
+            x1 = (-b + math.sqrt(delta)) / 2 * a
+            x2 = (-b - math.sqrt(delta)) / 2 * a
+            return f'A Função possui duas raízes reais exatas, em razão de Delta = {delta}, temos X1 = {x1} e X2 = {x2}'
+
+
 # Área de interface com o usuário
 print('''\033[33mTabela de Tipos de Cálculos:
-Função Afim
-Polígonos\033[m''')
-pergunta_categoria = str(input('Qual tipo de cálculo deseja executar?: ')).strip().upper()[0]
-if pergunta_categoria == 'F':
-    pergunta_funcao = str(input('Deseja Calcular a Raiz ou o Valor da Função?: ')).strip().upper()
-    if pergunta_funcao == 'RAIZ':
+Função Afim: FA
+Função Quadrática: FQ
+Polígonos: P\033[m''')
+pergunta_categoria = str(input('Qual tipo de cálculo deseja executar?: ')).strip().upper()[0:2]
+if pergunta_categoria == 'FA':
+    pergunta_funcao_afim = str(input('Deseja Calcular a Raiz ou o Valor da Função?: ')).strip().upper()[0]
+    if pergunta_funcao_afim == 'R':
         a = float(input('Digite o valor de A: '))
         b = float(input('Digite o valor de B: '))
         _, raiz = funcao_afim(a, b)
@@ -73,7 +91,23 @@ if pergunta_categoria == 'F':
         x = float(input('Digite o valor de X: '))
         x, _ = funcao_afim(a, b, x)
         print(x)
-elif pergunta == 'P':
+elif pergunta_categoria == 'FQ':
+    pergunta_funcao_quadratica = str(input('Deseja Calcular o valor da função ou as raízes?: ')).strip().upper()[0]
+    if pergunta_funcao_quadratica == 'V':
+        a = float(input('Digite o valor de A: '))
+        b = float(input('Digite o valor de B: '))
+        c = float(input('Digite o valor de C: '))
+        x = float(input('Digite o valor de X: '))
+        valor = funcao_quadratica(a, b, c, x)
+        print(valor)
+    elif pergunta_funcao_quadratica == 'R':
+        a = float(input('Digite o valor de A: '))
+        b = float(input('Digite o valor de B: '))
+        c = float(input('Digite o valor de C: '))
+        raiz = funcao_quadratica(a, b, c)
+        print(raiz)
+
+elif pergunta_categoria == 'P':
     print('''\033[33mTabela de Polígonos:
     Prisma de Base Circular: C
     Prisma de Base Triangular: T
@@ -81,37 +115,37 @@ elif pergunta == 'P':
     Prisma de Base Pentagonal: P
     Prisma de Base Hexagonal: HX
     Prisma de Base Heptagonal: HP \033[m''')
-    pergunta = str(input('Qual polígono deseja calcular as medidas? [C, T, Q, P, HX, HP]: ')).strip().upper()[0:2]
+    pergunta_poligonos = str(input('Qual polígono deseja calcular as medidas? [C, T, Q, P, HX, HP]: ')).strip().upper()[0:2]
     # Área de lógica de condicionais
-    if pergunta == 'Q':
+    if pergunta_poligonos == 'Q':
         base = float(input('Digite a medida da base do quadrilátero em cm: '))
         altura = float(input('Digite a medida da altura do quadrilátero em cm: '))
         comprimento = float(input('Digite a medida do comprimento do prisma em cm: '))
         resposta = quadrado(base, altura, comprimento)
         print(resposta)
-    elif pergunta == 'T':
+    elif pergunta_poligonos == 'T':
         base = float(input('Digite a medida da base do triângulo em cm: '))
         altura = float(input('Digite a medida da altura do triângulo em cm: '))
         comprimento = float(input('Digite a medida do comprimento do prisma em cm: '))
         resposta = triangulo(base, altura, comprimento)
         print(resposta)
-    elif pergunta == 'C':
+    elif pergunta_poligonos == 'C':
         raio = float(input('Digite a medida do raio do círculo em cm: '))
         comprimento = float(input('Digite a medida do comprimento do prisma em cm: '))
         resposta = cilindro(raio, comprimento)
         print(resposta)
-    elif pergunta == 'P':
+    elif pergunta_poligonos == 'P':
         apotema = float(input('Digite a medida do apótema do pentágono em cm: '))
         lado = float(input('Digite a medida do lado do pentágono em cm: '))
         comprimento = float(input('Digite a medida do comprimento do prisma em cm: '))
         resposta = pentagono(apotema, lado, comprimento)
         print(resposta)
-    elif pergunta == 'HX':
+    elif pergunta_poligonos == 'HX':
         lado = float(input('Digite a medida do lado do hexágono em cm: '))
         comprimento = float(input('Digite a medida do comprimento do prisma em cm: '))
         resposta = hexagono(lado, comprimento)
         print(resposta)
-    elif pergunta == 'HP':
+    elif pergunta_poligonos == 'HP':
         lado = float(input('Digite a medida do lado do heptágono em cm: '))
         apotema = float(input('Digite a medida do apótema do heptágono em cm: '))
         comprimento = float(input('Digite a medida do comprimento do prisma em cm: '))
