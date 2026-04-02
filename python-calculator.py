@@ -6,6 +6,14 @@ def fatorial(numero):
     fatorial = math.factorial(numero)
     return fatorial
 
+def porcentagem_aumento(valor, porcentagem):
+    valor_aumentado = valor * ((porcentagem / 100) + 1)
+    return valor_aumentado
+
+def porcentagem_desconto(valor, porcentagem):
+    valor_descontado = valor - ((porcentagem / 100) * valor)
+    return valor_descontado
+
 # Área de funções para todos os cálculos de polígonos
 def cilindro(raio, comprimento):
     area_base = (math.pi) * (raio * raio)
@@ -81,15 +89,16 @@ def funcao_quadratica(a, b, c, x=None):
 print('-' * 30)
 print('''\033[33mTabela de Tipos de Cálculos:
 
-Fatorial: F
+Fatorial: FT
 Função Afim: FA
 Função Quadrática: FQ
-Polígonos: P
+Porcentagem de Aumento e Desconto: PC
+Polígonos: PL
 \033[m''')
 print('-' * 30)
 pergunta_categoria = str(input('Qual tipo de cálculo deseja executar?: ')).strip().upper()[0:2]
 print('-' * 30)
-if pergunta_categoria == 'F':
+if pergunta_categoria == 'FT':
     numero = int(input('Digite o número que deseja calcular o fatorial: '))
     resposta = fatorial(numero)
     print(f'O Fatorial de {numero} é igual a {resposta}')
@@ -131,8 +140,19 @@ elif pergunta_categoria == 'FQ':
         raiz = funcao_quadratica(a, b, c)
         print('-' * 30)
         print(raiz)
-
-elif pergunta_categoria == 'P':
+elif pergunta_categoria == 'PC':
+    pergunta_porcentagem = str(input('Deseja calcular o aumento ou o desconto? [A/D]: ')).strip().upper()[0]
+    if pergunta_porcentagem == 'A':
+        valor = float(input('Digite o valor: '))
+        porcentagem = int(input('Digite a porcentagem: '))
+        reajuste = porcentagem_aumento(valor, porcentagem)
+        print(f'O Valor {valor} com aumento de {porcentagem}% é igual a {reajuste}')
+    else:
+        valor = float(input('Digite o valor: '))
+        porcentagem = int(input('Digite a porcentagem: '))
+        reajuste = porcentagem_desconto(valor, porcentagem)
+        print(f'O Valor {valor} com desconto de {porcentagem}% é igual a {reajuste}')
+elif pergunta_categoria == 'PL':
     print('''\033[33mTabela de Polígonos:
 
 Prisma de Base Circular: C
