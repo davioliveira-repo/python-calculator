@@ -1,6 +1,11 @@
 # Área de importação de bibliotecas
 import math
 
+# Área de funções de matemática básica
+def fatorial(numero):
+    fatorial = math.factorial(numero)
+    return fatorial
+
 # Área de funções para todos os cálculos de polígonos
 def cilindro(raio, comprimento):
     area_base = (math.pi) * (raio * raio)
@@ -76,6 +81,7 @@ def funcao_quadratica(a, b, c, x=None):
 print('-' * 30)
 print('''\033[33mTabela de Tipos de Cálculos:
 
+Fatorial: F
 Função Afim: FA
 Função Quadrática: FQ
 Polígonos: P
@@ -83,7 +89,11 @@ Polígonos: P
 print('-' * 30)
 pergunta_categoria = str(input('Qual tipo de cálculo deseja executar?: ')).strip().upper()[0:2]
 print('-' * 30)
-if pergunta_categoria == 'FA':
+if pergunta_categoria == 'F':
+    numero = int(input('Digite o número que deseja calcular o fatorial: '))
+    resposta = fatorial(numero)
+    print(f'O Fatorial de {numero} é igual a {resposta}')
+elif pergunta_categoria == 'FA':
     pergunta_funcao_afim = str(input('Deseja Calcular a Raiz ou o Valor da Função?: ')).strip().upper()[0]
     print('-' * 30)
     if pergunta_funcao_afim == 'R':
