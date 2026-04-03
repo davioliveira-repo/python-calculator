@@ -14,6 +14,19 @@ def porcentagem_desconto(valor, porcentagem):
     valor_descontado = valor - ((porcentagem / 100) * valor)
     return valor_descontado
 
+def progressao_aritmetica(lista, an=None, r=None):
+    a1 = lista[0]
+    if an == None:
+        an = lista[-1]
+    else:
+        an = an
+    if r == None:
+        r = lista[1] - lista[0]
+    else:
+        r = r
+    termo_geral = a1 + (an - 1) * r
+    return termo_geral
+
 # Área de funções para todos os cálculos de polígonos
 def cilindro(raio, comprimento):
     area_base = (math.pi) * (raio * raio)
@@ -90,6 +103,7 @@ print('-' * 30)
 print('''\033[33mTabela de Tipos de Cálculos:
 
 Fatorial: FT
+Progressão Aritmética: PA
 Função Afim: FA
 Função Quadrática: FQ
 Porcentagem de Aumento e Desconto: PC
@@ -102,6 +116,17 @@ if pergunta_categoria == 'FT':
     numero = int(input('Digite o número que deseja calcular o fatorial: '))
     resposta = fatorial(numero)
     print(f'O Fatorial de {numero} é igual a {resposta}')
+elif pergunta_categoria == 'PA':
+    pa = list()
+    while True:
+        numero = int(input('Digite um valor para adicionar à PA: '))
+        pa.append(numero)
+        pergunta = str(input('Deseja Continua [S/N]: ')).strip().upper()[0]
+        if pergunta == 'N':
+            break
+    valor = int(input('Qual posição deseja descobrir o valor? '))
+    resposta = progressao_aritmetica(pa, valor)
+    print(resposta)
 elif pergunta_categoria == 'FA':
     pergunta_funcao_afim = str(input('Deseja Calcular a Raiz ou o Valor da Função?: ')).strip().upper()[0]
     print('-' * 30)
