@@ -14,6 +14,14 @@ def porcentagem_desconto(valor, porcentagem):
     valor_descontado = valor - ((porcentagem / 100) * valor)
     return valor_descontado
 
+def fibonacci(quantidade):
+    lista = [0, 1, 1]
+    contador = 1
+    for c in range(quantidade - 3):
+        soma = lista[-1] + lista[contador]
+        contador += 1
+        lista.append(soma)
+    return lista
 
 # Área de funções para todos os cálculos de polígonos
 def cilindro(raio, comprimento):
@@ -91,6 +99,7 @@ print('-' * 30)
 print('''\033[33mTabela de Tipos de Cálculos:
 
 Fatorial: FT
+Fibonacci: FB
 Função Afim: FA
 Função Quadrática: FQ
 Porcentagem de Aumento e Desconto: PC
@@ -103,6 +112,10 @@ if pergunta_categoria == 'FT':
     numero = int(input('Digite o número que deseja calcular o fatorial: '))
     resposta = fatorial(numero)
     print(f'O Fatorial de {numero} é igual a {resposta}')
+elif pergunta_categoria == 'FB':
+    quantidade = int(input('Deseja ver quantos valores da sequência de fibonacci? '))
+    resposta = fibonacci(quantidade)
+    print(resposta)
 elif pergunta_categoria == 'FA':
     pergunta_funcao_afim = str(input('Deseja Calcular a Raiz ou o Valor da Função?: ')).strip().upper()[0]
     print('-' * 30)
